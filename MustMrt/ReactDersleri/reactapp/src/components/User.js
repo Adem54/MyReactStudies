@@ -55,8 +55,7 @@ import UserConsumer from '../context'
                         }
                          
                            </div>
-                    
-                     
+                        
                     )
                        
                    }
