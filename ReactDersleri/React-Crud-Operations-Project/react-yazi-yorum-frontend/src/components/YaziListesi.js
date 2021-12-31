@@ -1,16 +1,17 @@
 import React from "react";
-import axios from "axios";
+import {api} from "../api";
 import { useEffect, useState } from "react";
 import {NavLink as Link} from "react-router-dom";
 function YaziListesi() {
   const [yazilistesi, setYazilistesi] = useState([]);
   useEffect(() => {
-    axios
-      .get("https://react-yazi-yorum.herokuapp.com/posts")
+    api()
+      .get("/posts")
       .then((response) => {
         setYazilistesi(response.data);
       });
   }, []);
+ 
   return (
     <div className="ui relaxed divided list">
       {yazilistesi.map((yazi) => {
