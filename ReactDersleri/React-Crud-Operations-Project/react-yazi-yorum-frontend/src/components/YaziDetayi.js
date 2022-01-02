@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams,Link} from "react-router-dom";
 import {api} from "../api";
 import axios from "axios";
 import YaziYorumlari from "./YaziYorumlari";
@@ -11,7 +11,6 @@ function YaziDetayi(props) {
   const [comments, setComments] = useState([]);
   const params = useParams();
   const { id } = params;
- 
 
   //Postrequest
   const handleCommentSubmit = (commentBody,e) => {
