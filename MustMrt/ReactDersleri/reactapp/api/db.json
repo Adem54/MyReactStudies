@@ -1,0 +1,22 @@
+{
+    "users":[
+        {
+            "id":"uniq1",
+            "name":"Servet Kaya",
+            "salary":"6000",
+            "departmant":"Web-development"
+          },
+          {
+           "id":"uniq2",
+           "name":"Zeynep Erbas",
+           "salary":"7000",
+           "departmant":"Frontend-development"
+         },
+         {
+           "id":"uniq3",
+           "name":"Adem Erbas",
+           "salary":"8000",
+          "departmant":"Backend-development"
+         }
+    ]
+}
