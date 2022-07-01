@@ -1,0 +1,3 @@
+[submodule "react-router-6"]
+	path = react-router-6
+	url = https://github.com/Adem54/react-router-6.git
