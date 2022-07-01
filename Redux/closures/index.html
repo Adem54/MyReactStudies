@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Closures</h1>
+    <script>
+      /*
+   Closure
+JavaScript fonksiyon yönelimli bir dildir. Çok bağımsızlık verir. Fonksiyon bir yerde yaratılıp sonra başka bir değişkene atanarak diğer bir fonksiyona argüman olarak gönderilebilir ve sonra tamamen farklı bir yerden çağrılabilir.
+
+Bildiğiniz gibi fonksiyon kendi dışında olan değişkenlere ulaşabilir ve bu özelliklik oldukça fazla kullanılır.
+
+Peki ya dışarıdaki değişken değişirse? Fonksiyon en son değerini mi alacak yoksa yaratıldığında var olan değeri mi?
+
+Ayrıca diyelim ki fonksiyon başka bir yere gönderildi ve oradan çağrıldığında ne olur, yeni yerinden dışarıda bulunan değişkenlere erişebilir mi?
+
+Bu sorulara farklı diller farklı cevaplar vermektedir, bu bölümde JavaScriptin bu sorulara cevabını öğreneceksiniz.
+
+Birkaç soru
+Örnek olması amacıyla iki soru formülize edilecek olursa, sonrasında içsel mekanizması parça parça incelenecektir, ileride daha karmaşık sorulara cevap verebilirsiniz.
+
+selamVer fonksiyonu dışarıda bulunan isim değişkenini kullanmaktadır. Fonksiyon çalıştığında, hangi isim değişkeni kullanılacaktır?
+   */
+      /*
+   let isim = "Ahmet";
+
+function selamVer() {
+  alert("Merhaba, " + isim);
+}
+
+isim = "Mehmet";
+
+selamVer(); // "Ahmet" mi yoksa "Mehmet" mi gösterilecek?
+
+*/
+      /*
+Böyle durumlara tarayıcı ve sunucu tabanlı geliştirmelerde oldukça sık karşılaşılır. Bir fonksiyon yaratıldığı anda değil de daha sonra çalışmak üzere programlanabilir. Örneğin bir kullanıcı aksiyonu veya ağ üzerinden istekler bu gruba girer.
+
+Öyleyse soru: son değişiklikleri alır mı?
+calisanYarat diğer bir fonksiyon yaratır ve bunu döner. Bu yeni fonksiyon herhangi bir yerden çağrılabilir. Peki yaratıldığı yerin dışındaki değişkenlere veya çağrılan yerin dışındaki değişkenlere veya ikisine birden erişebilece mi?
+*/
+      function calisanYarat() {
+        let isimm = "Mehmet";
+
+        return function () {
+          console.log(isimm);
+        };
+      }
+
+      let isimm = "Zafer";
+
+      // fonksiyon yarat
+      let is = calisanYarat();
+
+      // çağır
+      is(); // burada "Mehmet" mi yoksa "Zafer" mi gösterilecek ?
+
+      function topla(x) {
+        return function (y) {
+          return x + y;
+        };
+      }
+      var topla5 = topla(5);
+      var sayi8 = topla5(3);
+      console.log(sayi8);
+
+      //BU ACIKLAMALARI DIKKATE OKUYALIM
+      let a = 3;
+      function addTwo(x) {
+        let ret = x + 2;
+        return ret;
+      }
+      let b = addTwo(a);
+      console.log(b);
+      /*
+ 1-Oncelikle biz bir a degiskeni global yurutmede deklere ediyoruz ve 3 degerini atama yapiyoruz
+ 2-81.satir - 84.satir birlikte, ve burda ne oluyor anlayalim..
+ addTwo isminde bir degisken tanimlaniyor,deklere ediliyor global baglamda.
+ Peki hangi deger ataniyor bu global baglmadaki addTwo degiskenine
+ Bir fonksiyonu tanimi var, iki parantez icerisinde ne var ise o addTwo ya atanacaktir.
+ addTwo fonksiyon degiskenine atanan suslu parantezler icindekiler, degerlendirilmez, yurutulmez, sadece ilerde kullanilmak uzere bir degiskende saklanir
+ 3-Su anda 85.satirdayiz.Basit gozukuyor ama acacak cok sey var icinde. Oncelikle bir tane global yurutme-uygulama baglaminda yeni bir degisken deklere ediyoruz b isminde. Degisken deklere edilir edilmez, undefined degerine sahiptir.
+ 4-Sonra,hala 85.satirdayiz 1 tane atama operatoru goruyoruz, =. B operatorune yeni bir deger atamaya hazirlaniyoruz.Sonra bir fonksiyon cagrilmasi, invoke edilmesi goruyoruz. Bir degisken ve ardinda yuvarlak parantezler (..) gorudgumuzde bu bir fonksiyon cagrilmasidir. Her fonksiyon birsey dondurur mutlaka,(ya bir deger , ya bir object ya da undefined). Fonksiyondan ne dondurulurse o b degiskenine atanir.
+ 5-Ama once bizim addTwo fonksiyonunu cagirmamiz gerekir. Javascript global yurutme baglamindaki hafizaya gider ve bakar, addTwo isminde bir degiskene. Ve 1 tane bulur, 81. satirda(veya 81-84 satirlar arasi). addTwo degiskenine dikkatle bakalim bir fonksiyon tanimlamasi iceriyor. a degiskeninin fonksiyona bir arguman olarak iletildigini unutmayin. Javascript global yurutme baglami memory-hafizasinda bir a degiskeni arar ve bulur, 3 degerinde oldugunu bulur ve 3 sayisinin fonksiyona arguman olarak iletir, artik fonksiyonu yurutmeye, cagirmaya hazirdir
+ 6-Simdi yurutme baglami degisecektir, cunku bir fonksiyon icine giriliyor ve artik yeni local bir scope a giriyoruz. Yeni bir yerel,local yurutme baglam i olusturulur, ismi addTwo yurutme baglami olan. Bu yurutme baglami call stack e push edilir yani onun ustune itilir. Yerel yurutme baglam i olan addTwo ya javascript in girdginde ilk yaptigi sey nedir?
+ 7-Belki de lokal baglamda yeni bir degsken olan ret i deklere etmesi diye dusunecegiz ama bu dogru bir cevap degildir. Dogru cevap biz oncelikle fojnksiyon paramtrelerine bakmaliyiz. Yeni degisken x lokal yurutme baglamninda deklere ediliyor oncelikle. Ve 3 degeri bir arguman olarak gecildigi icin,x degikenine 3 degeri ataniyor.
+ 8-Bir sonraki adim yeni bir degisken olan ret lokal yurutme baglaminda deklere edilir ve degeri undefined olarak atanir hemen.
+ 9-Hala 82.satirdayiz, ve ek olarak yerine getirilecekler var. Oncelikle bizim x degerine ihtiyacimiz var. Javascript x degerini arayacak. O ilk once lokal yurutme baglamina bakacak, Ve 1 tane buluyor 3 degerinde ve 2.islenen sayi 2 dir ve 3+2 sonucu 5 tir ve ret degiskenine 5 degeri atanir
+ 10-83.satirda ret degiskeninin  icerigi dondurulur. Yerel yurutme baglmainda baska bir arama ret 5 degerini icerir. Fonksiyon 5 sayisini dondurur ve fonksiyon sona erer
+ 11-83-84.satir. Fonksiyon sona eriyor. Locak yurutme baglami(local scope) yok edilir. X ve ret degiskenleri silinir, artik yoklar. Scope,baglam, call stack den cikarilir(popped edilir) ve donus degeri return ettigi deger, cagrilan baglama,cagrilan scope a dondurulur.AddTwo fonksiyonu global yurutme baglamindan,global scope dan cagrildigi icin, cagrilan baglam, global yurutme baglamidir, global scope dur 
+ 12-Simdi 83.satirda kalgimiz yerden devam ediyoruz. Donen deger olan 5, b degiskenine ataniyor. Hala 85. satirdayiz. 
+ 13-84.satirda b degiskeninin icerigi console da yazdiriliyuor, ornegimizde 5 sayisi
+
+ Lexical Scope
+ Bizim lexical scope un bazi yonlerii anlamiz gerekiyor.Asagidaki ornege bir goz atalim
+
+ */
+      let val1 = 2;
+      function multiplyThis(n) {
+        let ret = n * val1;
+        return ret;
+      }
+      let multiplied = multiplyThis(6);
+      console.log("example of scope:", multiplied);
+      /*
+ Burda fikir  bizim local scope da global scope da degiskenlere sahip olmamizdir. Javascript in bir karmasik yonu degiskenleri nasil aradigidir. Yerel yurtme baglaminda, yerel scope da bir degisken bulamaz ise, onu cagirlma kapsaminda,scope unda aryacaktir, ve eger orda da bulamadayisa, global scope a bakana kadar tekrar tekrar ayacaktir. VE orda da bulamazsa undefined dir. Yukardaki ornekte scope un nasil isledigini calistigini anliyorsan bunu gecebilirsin.
+ 1-Yeni bir val1 degiskenine global yurutme bglaminda, global scope da 2 degeri atanir
+ 2-Satir 111-114 yeni bir multiplyThis degiskeni tanimlanir ve fonksiyon tanimlamasi assign edilir atamasi yapilir
+ 3-Satir 115 yeni bir multiplied degiskeni tanimlanir global scope da, global yurutme baglmainda
+ 4-Global yurutme baglmaindan, multiplyThis  degiskeni bulup getirilir(global yurutme baglaminda hafizasinda ariyor), ve bir fonksiyon olarak yurutulur, 6 number degeri arguman olarak gecilir.
+ 5- Yeni bir fonksiyon cagrilmasi demek yeni bir yurutme baglami, yeni bir lokal scope olusturulmasi demektir. Yeni bir lokal yurutme baglam i olusturlur
+ 6-Local yurutme baglaminda, once nereye bakiyorduk once parametre ye bakilir ve n degiskeni deklere edilir ve 6 degeri atanir
+ 7-Local yurutme baglaminda 112.satirda ret isminde bir degsken deklere edilir
+ 8-112.satirda devam ediyoruz,toplama islemi yerine getilirilir, n degiskeni ve val1 degiskeni ile. n degiskeni local yurutme baglmainda, lokal scope da aranir onu biz 6.adimda atamasini yapmistik zaten. Local yurutme baglmi val1 degiskenine sahip degil, cagrilma,calling baglami, cagrilma scope u kontrol edilir, yani parametre icerigi. Cagri baglami, global yurutme baglamidir, val1 degiskenine global yurutme baglaminda bakalim, global scope da bakalim val 1 degiskenine. Evet val1 degiskeni global scope da, global yurutme baglmainda bulunuyor
+ 9-112.satirdan devam ediyoruz. n ve val1 i caripiyor ve ret degiskenine ataniyor ret=6*2 ve 12 dir degeri
+ 10- ret degiskeni return ediliyor,113.satirda. Local yurutme baglami, local scope ret ve n degiksnleri ile birlikte yok ediliyor
+ 11-115.satirda donelim, 12 olarak donen baglam, mulitpled degiskenine ataniyor
+ 12. Sonunda 116.satirda biz multipled degskenini console da gosteriyoruz
+
+ So in this example, we need to remember that a function has access to variables that are defined in its calling context. The formal name of this phenomenon is the lexical scope.
+ */
+
+      /*
+ A function that returns a function
+ 
+ İlk örnekte, addTwo işlevi bir sayı döndürür. Daha önce bir fonksiyonun herhangi bir şey döndürebileceğini unutmayın(Bir fonksiyon mutlaka birsey dondurur, sayi, obje veya undefined ama kesin birsey dondurur). Closure anlamak için gerekli olduğundan, bir fonksiyon döndüren bir fonksiyon örneğine bakalım. İşte analiz edeceğimiz örnek.
+ */
+
+      let val = 7;
+      function createAdder() {
+        function addNumbers(a, b) {
+          let ret = a + b;
+          return ret;
+        }
+        return addNumbers;
+      }
+      let adder = createAdder(); //Bu addNumbers fonksiyonunu donuyor
+      let sum = adder(val, 8); //Bu da addNumbers fonksiyonunun invoke edilemsi olayi var
+      console.log("example of function returning a function: ", sum);
+
+      /*
+ 1-139.satirda global scope da, global yurutme baglaminda bir val isminde degisken deklere ederiz, ve de 7 degerini assign ederiz degiskenimize
+ 2-140-146 satirlar arasi. createAdder isminde bir degisken deklere ederiz global yurutme baglmaninda, global scope da ve bir fonksiyon tanimlamasi assign ederiz bu degiskene. Oncekilerde oldugu gibi, biz fonksiyonun icine girmiyoruz, sadece hafizada createNumber degiskenine bir fonksiyon tanimlamasi yapiyor icinde ne varsa onu aliyor ama herhangi bir degerlendirme, yurutme yapmiyor sadece bunlari hafiza da baridiriyor
+ 3-Satir 147. adder isminde bir degisken tanimliyuorurz global yurutme baglamindam Gecici olarak undefined assigned ediliyor adder degiskenine
+ 4-Hala 147.satirdayiz , ve parantezleri goruyoruz, yuvarlak parantezler () bunun bir fonksiyon invoke edilmesi oldugunu anliyor ve fonksiyon invoke etmesi gerekiyor.Hemen global yurutme baglaminda, global scope da bir arama yapiyor, createAdder isminde bir fonksiyon tanimlanmis mi onu arayacak, ve 140.satirda createAdder fonksiyon degiskeninin tanimlandigini goruyor ve bunu cagiracak
+ 5-Fonksiyon cagirma. Su anda 140.satirdayiz. Yeni bir local scope olusturuluyor, yeni bir lokal yurutme baglami olusuturuluyor,Motor, javascript motoru, yeni context i yeni scopu veya baglami, call stack e ekliyor. Fonksiyonun herhangi bir argumani yok, ondan dolayi direk body ye gecebilir yoksa fonksiyon ilk cagrilirken once argumanlari olusturularak baslanacakti
+ 6-Hala 141-146 satirlardayiz. Yeni bir fonksiyon tanimlamamiz var. AddNumbers isiminde bir degiskeni lokal yurutme baglaminda, lokal scope ta olusturuyor.Burasi onemli, addNumbers sadece lokal scope ta,local yurutme baglaminda bulunuyor.Ve fonksiyon tanimalamasini local addNumbers lokal degiskeninde barindiriyoruz,sakliyoruz
+ 7-Simdi 145.satirdayiz. Burda return addNumbers isleminde biz, addNumbers in icerigini donuyoruz. Javascript motoru ismi addNumbers olan degiskeni ariyor ve buluyor. Bu bir fonksiyon tanimalamasidir. Guzel bir fonksiyon herseyi dondurebilir, fonksiyon definition, tanimi da dahil olmak uzere. Yani biz addNumbers in fonksiyon tanimlamasini dondururuz. 142 ve 143.satirlar addNumbers fonksiyonunun tanimalamasini olusturur ve addNumbers in lokal yurutme baglamini, lokal skopu da call stack den kaldirilir
+ 8.Return den sonra,akabinde, local yurutme baglami yok edilir, kaldirilir. Artik addNumbers degiskeni mevcut degil, fonksiyon bitince, hem scopu hem de icindeki local degiskenler bellekten siliinir,call stack den silinir.Ama islev tanimi hala mevcuttur, o fonksiyondan return edilir ve adder degiskenine atamasi yapilir veya assign edilir, bu degiskeni biz 3. adimda olusturmustuk....
+ 9.148.satirdayiz. sum isminde global yurutme baglaminda, global scope ta yeni bir degisken define ettik veya deklere ettik.Gecici olarak undefined degeri atama yapiliyor sum degiskenine
+ 10. Ve sonra, bizim bir fonksiyon invoke etmemiz, cagirmamiz yurutmemz gerekiyor. Hangi fonksiyonu,adder ismi ile tanimlanan fonksiyonu invoke etmemiz gerekiyor. Buna global yurutme baglaminda bakiyoruz, ve de buluyoruz, ve bunun 2 parametre alan bir fonksiyon oldugunu javascript motoru goruyor
+ 11.Simdi parametreleir bulup getirelim ki fonksiyonu cagirabilelim ve dogru argumanlari gecebilelim. 1.argumen val, 1.adimda tanimlamistik, bu number 7 degerini temsil ediyor ve diger 2.arguman ise 8 degeridir
+ 12. Artik bu fonksiyonu cagirmamiz gerkiyor.Fonksiyon tanimi 141 ile 144 arasindadir yani createAdder fonksiyonunu tanimi  
+ function addNumbers(a, b) {
+     let ret = a + b
+     return ret
+   } budur
+   Yeni lokal yurutme baglami olusturuluyor, local scope yani, lokal yurutme baglami icinde, yeni 2 tana degisken olusturuluyor a ve b diye, , ve onlar in deger olarak onceki adimda fonksiyona ilettgimz argumanlar oldugu icin sira ile 7 ve 8 degeri atanir
+13. 142.satirda ismi ret olan yeni bir degisken tanimlaniyor, ve bu lokal yurutme baglaminda deklere ediliyor, tanimlaniyor
+14. 142.satirda. Bir ekleme yerine getiriliyor, a degiskeninin icerigi ve b degskeninin icerigi toplanir ve sonuc 15 olure ve ret degiskenine 15 assign edilir
+15. ret degiskeni bu fonksiyondan return edilir. Local yurutme baglami, lokal scope yok edilir,  o call stack memory  den kaldirilir, ayni zamanda a,b ve ret degiskeni de artik ortadan kaldirilmistir ve bulunmuyor.exe
+16. return edilen deger sum degiskenine ataniyor 148.satirda
+17. Ve sum u console ile ekrana basariz
+
+As expected the console will print 15. We really go through a bunch of hoops here. I am trying to illustrate a few points here. First, a function definition can be stored in a variable, the function definition is invisible to the program until it gets called. Second, every time a function gets called, a local execution context is (temporarily) created. That execution context vanishes when the function is done. A function is done when it encounters return or the closing bracket }.
+Beklendiği gibi konsol 15 yazdıracak. Burada gerçekten bir sürü çemberden geçiyoruz. Burada birkaç noktayı açıklamaya çalışıyorum. İlk olarak, bir fonksiyon tanımı bir değişkende saklanabilir, fonksiyon tanımı çağrılana kadar program tarafından görülmez. İkincisi, bir fonksyon her çağrıldığında, yerel bir yürütme bağlamı (geçici olarak) oluşturulur. Bu yürütme bağlamı, bir scope, fonksiyon tamamlandığında kaybolur. Geri dönüş veya kapanış parantez } ile karşılaştığında bir fonksiyon bitmistir.
+ 
+ */
+
+      /*
+ Finally, a closure
+Take a look a the next code and try to figure out what will happen.
+ */
+
+      function createCounter() {
+        let counter = 0;
+        const myFunction = function () {
+          counter = counter + 1;
+          return counter;
+        };
+        return myFunction;
+      }
+      const increment = createCounter();
+      const c1 = increment();
+      const c2 = increment();
+      const c3 = increment();
+      console.log("example increment", c1, c2, c3);
+      /*
+        1- 187-194 satirlar arasi. Yeni bir createCounter isminde bir degisken olusturuluyor, global yurutme baglaminda, global scope ta, ve buna bir fonksiyon tanimlamasi yapilir.
+        2- 195.satirda, global yurutme baglamnnda, global scope da ,increment isminde bir degisken tanimlanir 
+        3- Yine 195.satirdayiz. createCounter fonksiyonunu call etmemiz invoke etmemiz gerekiyor, ve donen degeri increment degiskenine assign edecegiz
+        4-187-194. Fonksiyona cagrilmasi, invoke edilmesi.Yeni bir lokal yurutme baglami olusturulur, yeni bir scope olusturulur.
+        5.188.satir. Local yurutme baglaminda, yeni bir degisken deklere edilir counter isminde. 0 number degeri assign edilir
+        6. 189-192.satirlar. myFunction isminde bir degisken deklere ediliyor. Degisken lokal yurutme baglaminda tanimlaniyor. DEgisken icerigi de baska bir fonksiyon tanimlamasidir. 190-191. satirlar tanimlaniyor
+        7-193.satir. myFunction fonksiyonunun icerigi, tanimi return edilyor. Ve de lokal yurutme baglami silinir, yok edilir ve myFunction ve counter artik yoktur o degskenler de silinir.Control cagri baglamina atanir
+        8-195.satir. Cagri baglaminda,calling context, global yurutme baglaminda,  createCounter dan return edilen deger, increement degerine atanir,assign edilir. Increment degiskeni artik bir fonksiyon tanimini icerir. Fonksiyon tanimi ki createCounter dan return edilen. Artik myFunction diye bir tanim yok, ama ayni definition i biz return olarak increment e atadik, ama myFunction diye bir ifade yok artik silindi. Global baglamda, bu increment diye adlandirildi..
+        9.Satir 196. c1 isminde bir degisken deklere ediliyor
+        10. Satir 196 devam ediyor. increment degiskenine bakacak olursak ne donduruyordu, silinen myFunction fonks degiskeni icerigi olan 190-191. satirlar assign edilmis idi yani bir fonks icerigi 
+        counter = counter + 1
+            return counter
+           Bu fir fonksiyon,  yani ve cagriliyyor,invoke ediliyor 
+        11. Yeni bir yurutme baglam i oolusturulur, herhangi bir parametre bulunmuyor, bulunsa idi once parametreyi olusturma isleminde baslamaliydik fonksiyonun body sine girmeden once. Fonksiyonu yurutmeye baslayalim
+        12. Satir 190.  counter = counter + 1. Counter in degerini lokal yurutme baglmaninda ariyoruz. Biz sadece icerik olusturduk, fonksiyon icerigini ve asla lokal bir degisken olusturmadik dikkat edelim. Simdi de global yurutme baglami, global scope a bakalim. Burda da herhangi counter isminde tanimlaman bir variable bulamiyoruz.. Javascript bunu counter=undefined+1 diye degerlnediriyor, ve ismi counter olan yeni bir yerel degisken tanimliyor, dekklere ediyor ve de 1 numarasini atama yapiyor, tanimsiz 0 turunden oldugu icin
+        13.191.satir. Counter i return ederiz, veya 1 degerini return etmis olurz. Lokal yurutme baglamini, local scope u yok ederiz ve de counter degiskenini de silinmis olur
+        14.Tekrar 196.satira geliriz ve returned value 1 , 1 olarak donen deger c1 degiskenine atanacaktir
+        15.197.satir, da 10-14 adimalr arasi tekrar edilir
+        16.198.satir 10-14 adimlar arasi tekrar edilir
+        17.c1,c2,c3 console a yazilir
+
+        Bunu kendiniz deneyin ve ne olduğunu görün. Yukarıdaki açıklamamdan beklediğiniz gibi 1, 1 ve 1'i kaydetmediğini fark edeceksiniz. Bunun yerine 1, 2 ve 3'ü günlüğe kaydediyor. Peki ne veriyor?
+
+        increment fonskiyonu bir şekilde bu counter değerini hatırlıyor. Bu nasıl çalışıyor?
+        counter,global yürütme bağlamının bir parçası mı? Console.log(counter) deneyin ve tanımsız olacaksınız. Yani bu değil.
+        Belki, increase fonskyonu çağırdığınızda, bir şekilde oluşturulduğu fonksiyona geri döner (createCounter)? Bu nasıl işe yarayabilir ki? Değişken artışı, nereden geldiğini değil, fonksiyon tanımını içerir. Yani bu değil.
+        Yani başka bir mekanizma olmalı. Closure. Sonunda ona ulaştık, eksik parça.
+
+        BURAYI IYI ANLA---
+        Here is how it works. Whenever you declare a new function and assign it to a variable, you store the function definition, as well as a closure. The closure contains all the variables that are in scope at the time of creation of the function. It is analogous to a backpack. A function definition comes with a little backpack. And in its pack it stores all the variables that were in scope at the time that the function definition was created.
+        İşte nasıl çalıştığı. Yeni bir fonksiyon tanımladığınızda ve onu bir değişkene atadığınızda, fonksiyon tanımını ve ayrıca bir CLOSURE saklarsınız. THE CLOSURE, fonksiyon oluşturulduğu sırada kapsamda olan tüm değişkenleri içerir. Sırt çantasına benzer. Bir fonksiyon tanımı, küçük bir sırt çantasıyla birlikte gelir. Ve paketinde, fonksiyon tanımının oluşturulduğu sırada kapsamda olan tüm değişkenleri saklar.
+        Yani yukarıdaki açıklamamız tamamen yanlıştı, tekrar deneyelim ama bu sefer doğru.
+    */
+
+      function createCounter() {
+        let counter = 0;
+        const myFunction = function () {
+          counter = counter + 1;
+          return counter;
+        };
+        return myFunction;
+      }
+      const increment1 = createCounter();
+      const c11 = increment1();
+      const c22 = increment1();
+      const c33 = increment1();
+      console.log("example increment", c1, c2, c3);
+
+      /*
+        1-Satir 235-242. Bir tane createCounter isminde global yurutme bagamind degisken olusturduk ve ona bir fonksiyon tanimi assign ettik yuukarda dedgimiz gibi
+        2-Satir 243. de increment1 isminde bir degiskne tnaimladik global yurutme baglaminda ayni usteki gibi
+        3-Tekrar 243.satir.  createCounter i cagirmamiz gerekiyor ve donen degeri de increement1 e atama yapacgiz.Aynen yukardaki gibi
+        4-235-242.Fonksiyon cagirma, yeni bir local yurutme baglami olustururuz.Aynen yukardaki gibi
+        5-Satir 236. Local baglam icersinde counter isminde bir degisken tanimlariz ve de 0 degeri atamasi yapilir.Aynen yukardaki gibi
+        6-237-240 satirlar arasi.myfunctin isminde bir degisken tanimlariz. Tanimlanan degisken lokal yurutme baglamindadir, local scope tadir. Degiskenin icerigi baska bir fonksioyon definitionidir, tanimlamasidir.
+        238-239 satirlari olarak. 
+           counter = counter + 1
+            return counter
+           Simdi birde closure olusturulur ve fonksiyon taniminini bir parcasina dahil edilir....DIKKAT....
+           Closure scope taki degiskenleri icerir, bu durumda counter(0 degerine sahip olan) degiskeni ni closure tutmus oluyor
+
+           7.241.satir. myfunction icerigi dondurulur, (return myFunction) Lokal yurutme baglami silinir(icindeki degiskenlerle birlikte), myFunction ve counter artik bulunmuyor. Dolayisi ile biz bir fonkksiyon tanimalamasi yani myFunction silindi ama onun icerigi olan 
+            counter = counter + 1
+            return counter
+       Dolayisi ile, localscope ta bulunan degiskenleri(bu degiskenler lokal scope olusturuldugunda icinde olusturulan degiskenler ornegin ornekteki counter lokal degiskeni idi) iciinde bulunuduran sirtcantasi gorevi goren closure yi de bu ifadeler le birlikte  return ediliyor
+       8- 243.satir, cagirilan yurutme baglaminda, yani global yurutme baglaminda, createCounter dan donen deger,return edilen deger, increment1 e atamasi yapilir. increment1 degeri aritk bir fonksiyon tanimlamasidir(closure ile birlikte). Fonksiyon tanimlamasi, createCounter tarafindan return edilidi. Artik myFunction diye bir ifade bulunmuyor kaldirildi, ama increment1 e atanan fonksiyon icerigi myFunction fonksiyon icerigi ile ayndir, tabi global yurutme baglami icerisinde, ve de increment1 isminde.
+       9-244.satir. c11 isminde yeni bir degisken tanimlanir.com
+       10-244.satir devam ediyor
+        increment1 degiskenine bakalim, bu bir fonksiyondur bunu cagiralim. Bu daha onceden cagrilmis bir fonksiyonun tanimini iceriyor, 238-2390.satirlarda tanimlandigi gibi  
+        counter = counter + 1
+            return counter
+        Ayrica birde degiskenleri tutan sirt cantasi, closure e da sahiptir...
+        11-increment1() cagrilmasi ile yeni bir lokal yurutme baglami olsuturulur, herhangi bir parmaresi olmayan.Bu fonksiyonun body sini yurutuleim simdi
+        12.238.Satir. counter=counter+1. Burda counter degiskenini aramamiz gerkiyor. Lokal ve global yurutme baglamlairina bagkmadan once, bizim closure yani srit cantamiza bir bakalim boyle bir degisken var mi orda,. Closure i bir cek edelim. Dikkat edelim, closure counter isminde bir degisken tutuyor ve degeri 0 olan couter isminde 1 degisken tutuyor.238.saturdaki ifadeden sonra counter=counter(0-closure dan gelir)+1. counter degeri 1 olarak set edilir. Ve bu counter degeri tekrardan alinip closure a sirt cantasina saklanir. Su anda closure counter isminde degeri 1 olan bir degisken tutuyor.
+        13.239.Satir. Biz counter in iceriigni 1 olarak donuyor burda return counter;  VE de local yurutme baglamini ve onun icindeki degiskenleri de kaldiyoruz ortadan, call stack ten silinir
+        14.Tekrardan 244.satira gelelim.c11  e donen 1 degeri ataniyor
+        15.245.Satir. 10-14 arasi adimlari tekrar ediyoruz. Bu sefer closure imize baktigmizda orda degeri 1 olan counter degiskeni gorecegiz. Bu 12.adimda anlatildi. Degeri artiriliyor ve counter 2 olarak closure da saklaniyor ve counter 2 olarak return edilir ve de c22 degeri 2 olur
+        16.246.Satir. 10-14 arasi adimlar tekrar edilir, ve c33 e increase1 den donen 3 degeri atanir
+        17. 247.satir c11,c22,c33 un degiskenleri yazdirilir  
+
+        So now we understand how this works. The key to remember is that when a function gets declared, it contains a function definition and a closure. The closure is a collection of all the variables in scope at the time of creation of the function.
+        You may ask, does any function has a closure, even functions created in the global scope? The answer is yes. Functions created in the global scope create a closure. But since these functions were created in the global scope, they have access to all the variables in the global scope. And the closure concept is not really relevant.
+        When a function returns a function, that is when the concept of closures becomes more relevant. The returned function has access to variables that are not in the global scope, but they solely exist in its closure.
+    
+        Not so trivial(onemsiz) closures
+        Sometimes closures show up when you don’t even notice it. You may have seen an example of what we call partial application. Like in the following code.
+
+        Closure olayi fonksiyon icinde fonksiyon tanimlandiginda gundemimze giriyor cunku global de olusturulan fonksiyonlarda da closure var ama zaten tum fonmksiyonlar global daki degiskenlere erisebildikleri icin burda closure un olmasinin bize sagladigi ekstra birsey yok onun icin closure bizim gundemimize, fonksiyon icinde bir fonksiyon kullanimlairinda veya bir fonksiyonun baska bir fonksiyonun icerigini dondurmesi ve o dondurdgu icerigi daha sonra birkac kez baska biryerde invoke etmesi ile karsimiza cikiyor......MUTHIS BESTRACTISE VE UST SEVIYE BIR DURUM SOZ KONUSUDUR...
+
+               */
+      let c = 4;
+      const addX = (x) => (n) => n + x;
+      const addThree = addX(3);
+      let d = addThree(c);
+      console.log("example partial application", d);
+
+    //  In case the arrow function throws you off, here is the equivalent.
+
+        let cc = 4
+    function addX(x) {
+    return function(n) {
+        return n + x
+    }
+    }
+    const addThreee = addX(3)
+    let dd = addThree(cc)
+    console.log('example partial application', dd)
+    /*
+    We declare a generic adder function addX that takes one parameter (x) and returns another function.
+    Bir parametre (x) alan ve başka bir işlev döndüren genel bir toplayıcı fonksiyonu addX bildiririz.
+    REturn edilen fonksiyonda 1 parametre aliyor ve de onu x degiskenine ekliyor
+    Burda x degiskeni closure un bir parcasidir, yani return edilen fonksiyon, n paramtresini alan fonksyon olusturulurken closure u ile birlikte olusturulur ve closure da lokal yurutme baglami icierisnde bulunan, degisken leri tutar ki bu x degiskenidir, addX fonksiynunun parametresinde de bulunan
+    addThree degiskeni lokal yurutme baglaninda tanimlandigi zaman, ona addX(3) fonksiyonunun return ettigi bir fonksiyon icerigi assign edilir tabi closure si ile birlikte yani x degerini tutmustu closure
+    Ve su anda artik, addThree cagriliyor ve yurutuluyor, ve onun x degiskenine erisimi var nerden tabi ki closure dan ve n degiskeni parametre olarak argumen aliyor 4 olarak, x degeri de 3 idi dolayisi ile toplam 7 degeri dondurulur.....
+
+
+    //HARIKA ANLATIM......
+    The way I will always remember closures is through the backpack analogy. When a function gets created and passed around or returned from another function, it carries a backpack with it. And in the backpack are all the variables that were in scope when the function was declared.
+    Kapanışları her zaman hatırlayacağım yol, sırt çantası benzetmesidir. Bir fonksiyon oluşturulduğunda ve başka bir fonksiyondan geri döndüğünde, yanında bir sırt çantası taşır. Ve sırt çantasında, işlev bildirildiğinde kapsamda olan tüm değişkenler bulunur.
+    */
+    </script>
+  </body>
+</html>
