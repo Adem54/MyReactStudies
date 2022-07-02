@@ -4,9 +4,7 @@ import { loginAction } from '../store/feature/login/LoginSlice';
 const LoginComponent = () => {
     const  dispatch=useDispatch();
     //dispatch araciligi ile loginSlice icinden gelen loginAction fonksiyonun paramtresine burdan gonderecgeigimnz objeyi baglamais olacagiz....
-    
 
-    
   return (
  <div>
        <h1>LoginComponent</h1>

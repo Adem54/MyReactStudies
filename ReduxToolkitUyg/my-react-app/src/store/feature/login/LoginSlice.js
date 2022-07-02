@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const login = { name: "", surname: "" };
 
 export const LoginSlice = createSlice({
+   //name-typename i temsil ediyor
   //Bizden name,inittalstate ve de reducer istiyor buraya geldigmizde
   name: "login", //name bizim icin reducer ismidir, actionlari cagiririken name/actionismi olarak cagiriyor
   initialState: {
@@ -13,8 +14,6 @@ export const LoginSlice = createSlice({
     loginAction: (state, action) => {
       //state,action otomatik olarak geliyor,action payload ve type dan olusuyor normalde...state.value dedigimiz zaman tabi ki initalState e karsilik gelen deger olmus oluyor
       state.login= action.payload;
-  
-     
     },
     logoutAction: (state, action) => {
       state.initialState = action.payload;
