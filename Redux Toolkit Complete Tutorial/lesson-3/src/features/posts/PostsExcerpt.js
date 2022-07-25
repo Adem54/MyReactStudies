@@ -3,7 +3,10 @@ import TimeAgo from "./TimeAgo";
 import ReactionButtons from "./ReactionButtons";
 import {Link} from "react-router-dom";
 
+
 const PostsExcerpt = ({ post }) => {
+    console.log("PostsExcerpt comp re-rendered")
+
     return (
         <article>
             <h2>{post.title}</h2>
@@ -18,3 +21,4 @@ const PostsExcerpt = ({ post }) => {
     )
 }
 export default PostsExcerpt
+//PostExcerpt icinde hicbirsey degismemesine ragmen sirf 

@@ -10,6 +10,7 @@ const reactionEmoji = {
 }
 
 const ReactionButtons = ({ post }) => {
+    console.log("REactionButtons comp re-rendered")
     const dispatch = useDispatch()
 
     const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
