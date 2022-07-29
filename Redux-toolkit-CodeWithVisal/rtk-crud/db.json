@@ -1,0 +1,28 @@
+{
+  "contacts": [
+    {
+      "name": "Adam Marcus",
+      "email": "adam123@gmail.com",
+      "contact": "84559943",
+      "id": 1
+    },
+    {
+      "name": "Tom Cruise updated",
+      "email": "tom@gmail.com",
+      "contact": "64532471",
+      "id": 2
+    },
+    {
+      "name": "James Bond",
+      "email": "james@gmail.com",
+      "contact": "23516935",
+      "id": 3
+    },
+    {
+      "name": "Adem Erbas",
+      "email": "adem5434e@gmail.com",
+      "contact": "545654675467",
+      "id": 4
+    }
+  ]
+}
