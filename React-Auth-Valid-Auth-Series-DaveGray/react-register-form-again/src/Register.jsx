@@ -300,6 +300,7 @@ let result = pattern.test(text); Sonuc false, ama ornegin text stringi icinde ol
               required
               aria-invalid={validMatch ? "false" : "true"}
               aria-describedby="confirmnote"
+              //aria-invalid, ve aria-describedby bunlarin varlik sebepleri screen-reader chrome eklentisi ile, eger kullanici, input icindeki data yi girerken hangi descriptionlar veya hangi validation kurallari var ise onlarin da ekran okuyucu tarafindan okunmasi icin veriliyor ve de onlar, ne zaman okunmasini da yine, aria-invalid ile ayarlioruz yani, aria-invalid true olunca galiba, kullaniciya bilgi vermenn gerekliligi ok olmus olyor gibi
               onFocus={() => setMatchFocus(true)}
               onBlur={() => setMatchFocus(false)}
             />
