@@ -96,6 +96,9 @@ function App() {
   //SelectOptions da bu sekilde type veriliyor event e....
   const handleClick=(e:React.ChangeEvent<HTMLSelectElement>)=>{
     setHealth(e.target.value);
+    //Select-optioan kullanim mantigi....
+    //Kullanicinin tikladigi e.target.value ile bizim health state timize atanir yani biz kullanicinin sectigi datayi state e alarak o datayi kontrol altina aliyoruz ki onu istedgimz yerde kullanabilelim nitekim, select icerisine value attributune atayarak kullanabilmis oluyoruz.... ve healt
+    // state timizde her zaman select icindeki value ye verilir , select options da isler her zaman bu sekilde ilerler.....onemli....
   }
 
   const toggleShow=(recipe:any)=>{

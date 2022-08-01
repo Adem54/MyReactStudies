@@ -2,8 +2,6 @@ import React, { useContext, useState } from 'react'
 import { TodoContext } from '../context/todoContext'
 import { TodoContextType,ITodo } from '../@types/todo'
 
-
-
 const AddTodo:React.FC = () => {
     const {saveTodo}=useContext(TodoContext) as TodoContextType;
     const [formData,setFormData]=useState<ITodo>({} as ITodo)
