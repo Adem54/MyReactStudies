@@ -303,6 +303,7 @@ let result = pattern.test(text); Sonuc false, ama ornegin text stringi icinde ol
               onFocus={() => setMatchFocus(true)}
               onBlur={() => setMatchFocus(false)}
             />
+            {/* Ozellikle aria-invalid ve aria-descirbedby ozelliklerinin accesibility ile nasil bir faydasi oldugunu gormek icin chrome da screean reader extension i ekleyip o sekilde form input alanlarini girerek test yapabiliriz.... */}
             <p
               id="confirmnote"
               className={
