@@ -22,17 +22,13 @@ export default Unauthorized
 
 /*
 Bestpractise-navigate(-1) ile kullaniciyi Go Back butonu ile bir onceki sayfaya geri dondurme
-
-
 <button onclick="goBack()">Go Back</button>
 <script>
 function goBack() {
     window.history.back();
 }
 </script>
-
 Veya 
-
 <button onclick="history.go(-1);">Go back</button>
 if we want to more than one step back then increase
 For going 2 steps back history.go(-2)
