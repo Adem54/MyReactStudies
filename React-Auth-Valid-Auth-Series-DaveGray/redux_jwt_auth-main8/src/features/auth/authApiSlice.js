@@ -15,3 +15,5 @@ export const authApiSlice = apiSlice.injectEndpoints({
 export const {
     useLoginMutation
 } = authApiSlice
+
+//Burasi normal login islemlerinde kullaniliyor
