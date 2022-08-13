@@ -46,7 +46,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
     "shopping-cart",
     []
-  )
+  )//cartItems burda dizi icindeki 2. elemani temsil ediyor
+  //cartItems guncellendiginde ise
+  console.log("cartItems: ",cartItems);
+  console.log("setCartItems_ ",setCartItems);
 
   //BESTPRACTISE..BU DA BIZE COK LAZM OLACAK..VE BUNU DA SHOPPINGCARTCONTEXT TE TUTUYORUZKI BURDA SUNA DIKKAT EDELIM BIZ 
   //SHOPPINGCART ILE ILGILI HANGI DATALARI KULLANICIYA GOSTERECEGIZ, VE SHOPPINGCART ILE ILGILI HANGI DATALAR VE KULLANACAGMIZ ONLARI
@@ -72,8 +75,10 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   // BESTPRATISE....COOK ONEMLI BIR PRACTISE..SETCARTITEMS ICERISINDE GERCEKTEN UZUN BIR ISLEM YAPIYORUZ..
   function increaseCartQuantity(id: number) {
+    console.log("increaseCartQuantity");
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id) == null) {
+        
         return [...currItems, { id, quantity: 1 }] //arttirma isleminde ise cart icinde eger aranan id ye ait bir obje  yok ise o zaman
         //bu urun  ilk defa ekleniyordur, ve cart icerisne bu obje eklenir ve baslangic olarak da 1 olarak verilir
       } else {//Ama yok eger ki bu urun daha onceden eklenmis ise o zaman da urun adedi 1 arttirilir
@@ -82,13 +87,13 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
           if (item.id === id) {
             return { ...item, quantity: item.quantity + 1 }
           } else {
-            console.log("item:",item);
             return item //Bu map id yi ariyor ya, tek tek donerek id yi buldugu yerde quantity 1 arttirsin ama ornegin 3 tane data var cardda ve id 2 numaraliya tikliyorsun biz map ile tek tek card icindeki 3 id yi de cek ediyoruz ve 2. numarali id nin quantity sini 1 arttiryorsun ama digerlerinde hicbirsey yapmayacagiz ondan dolayi da onlari da aynisi gibi doniyoruz item diye...
           }//Son durumda ise
         })
       }
     })
   }
+  
   function decreaseCartQuantity(id: number) {
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id)?.quantity === 1) {

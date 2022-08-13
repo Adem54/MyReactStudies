@@ -16,18 +16,15 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
   */
   const [value, setValue] = useState<T>(() => {
     const jsonValue = localStorage.getItem(key)
-    console.log("jsonValue: ",jsonValue);
     if (jsonValue != null) return JSON.parse(jsonValue)
 
     if (typeof initialValue === "function") {
-      console.log("initialValue: ",initialValue);
       return (initialValue as () => T)()//Bunu yapmazsak o zaman bize initialvalue fonksyon olarak geldigi zaman tutup direk fonksiyonun kendsini donderir return ettigi dondermek yerine..
     } else {
-      console.log("initialValueeee: ",initialValue);
       return initialValue
     }
   })
-  console.log("valueeeee_ ",value);
+  
   /*
   Kisacasi eger localStorage da hicbirsey yok ise o zaman demekki ilk defa basliyor o zaman da initialValue yi ver ya direk ki o da bos dizi olarak gelecek ya da eger bir fonksiyonun return ettigi degeri verecek ise o zaman da onu ver demis oluyoruz, ki bu diyelim ki localStorage da data silindi o durumlarda
   ve de en bastan baslandigi durumlarda gecerlidir
@@ -41,6 +38,7 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
 
   console.log("value: ",value);
   console.log("setValue: ",setValue);
+  
   return [value, setValue] as [typeof value, typeof setValue]
   //Bu da bestpractise, dondugmuz data nin type larini da vermemiz gerekiyor...VE bu sekilde kullanildigini daha once gormemistim...
 }
@@ -52,5 +50,12 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T)) {
     []
   )
 
+
+  useLocalStorage hook u da  return [value, setValue] as [typeof value, typeof setValue] bu sekilde bir sey return ediyor
+  Yani olay su aslinda 
+   const [cartItems, setCartItems]=[value, setValue] as [typeof value, typeof setValue]
+   boyle oluyor cartItems da ornegin increaseCartQuantity methodunda cartItems da degisiklik oluyor bu su demektir degisiklik value de oluyor demektir yani
+   Ondan dolayi da useLocalStorage da yapilan islem eger localstorage da hic data  yok ise o zaman oraya bos bir dizi ile baslatmak key e de shopping-cart vermek
+   ardindan da zaten ayni useState mantiginda, cartItems daki her degisiklik dogrudan, value ye yansiyor zaten...
   Burda setCartItems ile yapilan degisiklikler, ne yapiyor cartItems i render ediyor guncelliyor ve burda
 */
