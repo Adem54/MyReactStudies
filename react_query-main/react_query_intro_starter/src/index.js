@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+//Burasi react-18 ile geldi normalde react-17 de sadece react-dom olarak import edilirdi
 import "./index.css";
 import App from "./App";
 
@@ -18,3 +19,4 @@ root.render(
     </QueryClientProvider>
   </React.StrictMode>
 );
+//React.StrictMode developer ortaminda calisir sadece

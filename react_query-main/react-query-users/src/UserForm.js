@@ -18,7 +18,7 @@ const UserForm = ({ user,setIsEditing }) => {
   console.log("fields: ", fields);
 
 
-    //Burda simdi kritik bir konu var, biz bu mutation islemini yaptiktan sonra, bir onceki query mi, dogrula ve
+//Burda simdi kritik bir konu var, biz bu mutation islemini yaptiktan sonra, bir onceki query mi, dogrula ve
   //hemen otomatik olarak, kendi kendine, yeni bir call islemi gercekestir datayi guncellmek icin yoksa degisen
   //datayi biz ekranda goremeyiz..
   //Burda bir durum daha var, eger kullanicimizin, internet hizi cok yavas ise o zaman da save isleminde sonra cache invalidateQueries¨
