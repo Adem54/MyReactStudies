@@ -48,8 +48,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     []
   )//cartItems burda dizi icindeki 2. elemani temsil ediyor
   //cartItems guncellendiginde ise
-  console.log("cartItems: ",cartItems);
-  console.log("setCartItems_ ",setCartItems);
+
 
   //BESTPRACTISE..BU DA BIZE COK LAZM OLACAK..VE BUNU DA SHOPPINGCARTCONTEXT TE TUTUYORUZKI BURDA SUNA DIKKAT EDELIM BIZ 
   //SHOPPINGCART ILE ILGILI HANGI DATALARI KULLANICIYA GOSTERECEGIZ, VE SHOPPINGCART ILE ILGILI HANGI DATALAR VE KULLANACAGMIZ ONLARI
@@ -75,7 +74,6 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   // BESTPRATISE....COOK ONEMLI BIR PRACTISE..SETCARTITEMS ICERISINDE GERCEKTEN UZUN BIR ISLEM YAPIYORUZ..
   function increaseCartQuantity(id: number) {
-    console.log("increaseCartQuantity");
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id) == null) {
         
@@ -93,7 +91,7 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
       }
     })
   }
-  
+
   function decreaseCartQuantity(id: number) {
     setCartItems(currItems => {
       if (currItems.find(item => item.id === id)?.quantity === 1) {
