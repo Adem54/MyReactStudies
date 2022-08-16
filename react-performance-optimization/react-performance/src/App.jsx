@@ -1,47 +1,70 @@
 import { useCallback, useMemo, useState } from "react";
 import "./App.css";
-import Header from "./components/Header";
+import BigList from "./components/BigList";
+import { useFetch } from "./components/useFetch";
+const url = 'https://course-api.com/javascript-store-products'
+
+
+// every time props or state changes, component re-renders
+const calculateMostExpensive = (data) => {
+  console.log("calculateMostExpensive...")
+  return (
+    data.reduce((total, item) => {
+      const price = item.fields.price
+      if (price >= total) {
+        total = price
+      }
+      return total
+    }, 0) / 100
+  )
+}
 
 function App() {
-  const [number, setNumber] = useState(0);
-  const [text,setText]=useState("");
 
-  /*
-  useCallback
-  biz butonu Header compnenti icine tasidik ve artik butona header componenti icerisinde tikliyoruz ve butona her tiklandiginda
-  number state i degisiyor, dolayisi ile App.js render ediliyor ama her seferinden Header comonentini de render ediyor oysa Header componentine
-  giden fonksiyon asliinda degismiyor gibi gozukuyor ama iste, fonksiyon referans type oldugu icin fonksiyonu da yeniden olusturudugu icin 
-  her App.js degistginde Heaer a props olarak gonderilen fonksiyonun referansi da degisiyor bu degisiklik Header in da render edilmesine sebep oluyor
-  Peki bunu nasil onleriz?
-  Header a props olarak gonderdigmiz increment fonksiyonunun aslinda her defasinda degismedigni ayni oldugunu reacte soylememiz gerekiyor
-  useCallback tam da burda devreye giriyor
-  useCallback ile fonksiyon donuyoruz ve yaptmgz fonksiyonu aslinda memoize etmis oluyoruz, useMemo daki mantik ile ayni sekilde dependency array ler
-  uzerinden de fonksiyonun degisme durumunu kontrol edebiliyoruz..
-  */
+  const { products } = useFetch(url)
+  const [count, setCount] = useState(0)
+  const [cart, setCart] = useState(0)
 
-  const increment=useCallback(()=>{
-  setNumber(prevNum=>prevNum+1)
-  },[]);
-  //number degiskenini dependency array e koymaz isek eger o zaman buttona tiklandiginda increment fonksinu 1 kereligine calisir 
-  //number degerini 0 dan 1 yapar ve birdaha calismaz, cunku dependency array bos kaldignda 1 kerelik calisir ondan dolayi da
-  //fonksiyon bizim number degerimizin degismesine bagli olarak calismasini istiyorsak dependency arraya numberi veririz
-  //Ama boyle olunca biz Header in her fonksiyon invoke edildginde render edilmesin onleyememis oluyoruz
-  //Sebebi de biz aslinda number her degistiginde bu fonksyonu bastan tanimla dedgmiz icin, number her degistiginde fonksiyon yenidden 
-  //tanimlanarkk yeni bir referans ile geliyor ve sanki number her degistignde farkli bir props gonderiyormus gibi oluyor 
-  //O zaman biz dependency array deki number dan kurtulursak o zamn ne yapariz her seferinde Header in render edilmsini onlemis oluruz
-  //Onun icinde setNumber islemini biz prevstate=>prevstate+1 ile gerceklestiririz
+  const addToCart = useCallback(() => {
+    setCart(cart=>cart + 1)
+  }, [])
 
+
+  // const addToCart = () => {
+  //   setCart(cart + 1)
+  // }
+
+  const mostExpensive = useMemo(() => calculateMostExpensive(products), [
+    products,
+  ])
+/*
+Hesaplamasi cok uzun zaman alacak fonksiyonlardan bahsediyourz
+Ornegin, bizim App.js componentinden icerisinde text inputlarin oludugu
+mesela text-area inputununda oldugu, form elementleri olsun ve biz controlled
+form yapmak icin inputlar icine girilen her bir karakter App.js in render edilmesini 
+saglar ve her render edildiginde de ornegin farzedelim ki cok zaman alan
+ve uzun bir islem yapan ve de her islem soncunda da ayni sonucu donduren
+ fonksiyon var ve her App.js render oldugunda o sonkfion da bastan calisiyor ve 
+ bize ciddi performans kaybi yasatior ciddi bir maliyet olusturuyor bize 
+ Iste bu senaryo tam de useMemo nun kullanilacagiz senaryodur..Iste 
+ biz eger, biz bu tarz cok maliyetli fonksiyonlarin o componentte gerceklesen
+ her bir render isleminde tekrar tekrar hesaplanarak, invoke edilerek gelmesini
+ engelleyerek buyuk bir maliyet yukunden kurtulmak icin useMemo yu kulllaniirz
+Bu arada, biz dependencya array a de hangi datayi kullaniyor isek onu
+gireriz ki her o data degistiginde tekrar hesaplansin calculateMostExpensive fonksiiyonu
+*/
+  
   return (
-    <div className="App">
-      <Header  increment={increment} />
-      <h2>{number}</h2>
-      <br />
-    
-      <br/>
-      <br/>
-      <input value={text} onChange={({target})=>setText(target.value)}/>
-    </div>
-  );
+    <>
+      <h1>Count : {count}</h1>
+      <button className='btn' onClick={() => setCount(count + 1)}>
+        click me
+      </button>
+      <h1 style={{ marginTop: '3rem' }}>cart : {cart}</h1>
+      <h1>Most Expensive : ${mostExpensive}</h1>
+      <BigList products={products} addToCart={addToCart} />
+    </>
+  )
 }
 
 export default App;

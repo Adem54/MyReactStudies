@@ -17,6 +17,7 @@ const calculateMostExpensive = (data) => {
     }, 0) / 100
   )
 }
+
 const Index = () => {
   const { products } = useFetch(url)
   const [count, setCount] = useState(0)
