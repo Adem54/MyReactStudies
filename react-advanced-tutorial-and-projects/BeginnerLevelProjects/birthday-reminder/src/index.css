@@ -32,7 +32,6 @@ yuzde ile boyutlari verilen kutunun disina tasiyor digerleri de
  padding:.3rem 0 1.3rem 0;
  border-radius:.2rem;
  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.39);
- border:1px solid;
  display:flex;
  flex-direction: column;
  
@@ -57,6 +56,16 @@ yuzde ile boyutlari verilen kutunun disina tasiyor digerleri de
   justify-content:start;
   align-items: center;
   box-sizing:border-box;
+
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+  .person-list {
+    width:24rem;
+  } 
 
 }
 

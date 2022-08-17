@@ -19,7 +19,7 @@ const PersonList = () => {
     },[url])
     
     const getPeopleHaveBirthday=()=>{
-         return data?.filter(user=>{
+         const sortedData= data?.filter(user=>{
           const date=new Date(user.birthday).getDate();
           const today=new Date().getDate();
           if(date===today){
@@ -27,6 +27,7 @@ const PersonList = () => {
             return user;
           }
          });
+       return  sortedData.sort((a,b)=>(new Date(b.birthday).getFullYear() - new Date(a.birthday).getFullYear()))
     }
 
     
