@@ -1,0 +1,175 @@
+body {
+  background-color: #F1F5F8;
+}
+
+.App {
+  text-align: center;
+}
+
+.main-title {
+  letter-spacing: .15rem;
+  font-size: 3rem;
+  position: relative;
+}
+
+.main-title:after {
+  position: absolute;
+  content: '';
+  height: 2px;
+  /* adjust this to move up and down. you may have to adjust the line height of the paragraph if you move it down a lot. */
+  bottom: -4px;
+
+
+  /****** 
+ optional values below 
+ ******/
+
+  /* center - (optional) use with adjusting width   */
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 10%;
+  background: #33DDFF;
+
+  /* optional animation */
+  -o-transition: .5s;
+  -ms-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.main-title:hover:after {
+  width: 20%;
+  background: orange;
+}
+
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 50%;
+  border-radius: .3rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+    background-color:#FBEFF8 ;
+  }
+  .card {
+    width: 40%;
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  body {
+    background-color: bisque;
+  }
+  .card {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lavender;
+  }
+  .card {
+    width: 70%;
+  }
+}
+
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.img {
+  max-height: 20rem;
+  object-position: bottom;
+  object-fit: cover;
+  border-top-left-radius: .3rem;
+  border-top-right-radius: .3rem;
+
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: .6rem 1.7rem;
+  box-sizing: border-box;
+
+}
+
+.title-price {
+  width: 100%;
+  display: flex;
+}
+
+.name {
+  flex-grow: 4;
+  display: flex;
+  justify-content: flex-start;
+  letter-spacing: .1rem;
+
+}
+
+.price {
+
+  /* background-color: lightblue; */
+
+}
+
+.price>h4 {
+  background-color: #EBF7FF;
+  padding: .2rem .5rem;
+  font-weight: bold;
+  color: #49a6e9;
+  border-radius: .1rem;
+  letter-spacing: .2rem;
+}
+
+.info {
+  text-align: left;
+  color: #617d98;
+  letter-spacing: .04rem;
+
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.link {
+  text-decoration: none;
+  color: #49a6e9;
+  letter-spacing: .05rem;
+}
+
+.btn {
+  border: none;
+  padding: .5rem 2.4rem;
+  font-size: 1rem;
+  letter-spacing: .12rem;
+  border-radius: .2rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.remove-btn {
+  background-color: #fff;
+  border: 1px solid tomato;
+  color: tomato;
+}
+
+.btn:hover {
+  background-color: #617d98;
+  color: #fff;
+  border: none;
+}
+
+.refresh-btn {
+  background-color: #FF3377;
+  border: 1px solid tomato;
+  color: #000;
+}

@@ -1,10 +1,6 @@
 import { createContext,useContext,useState,ReactNode } from "react";
 import { people } from "../Types";
 
-
-
-
-
 interface ReminderContextType{
     data:people,
     clearAll:()=>void,
