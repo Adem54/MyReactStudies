@@ -1,4 +1,3 @@
-
 export const limitedText=(info:string,limitNum:number)=>{
     const text=info.split(" ");
     

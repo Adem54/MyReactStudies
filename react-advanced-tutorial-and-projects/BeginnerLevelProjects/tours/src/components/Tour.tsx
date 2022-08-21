@@ -1,8 +1,8 @@
-import React from "react";
-import { Button, Card, Container, Row } from "react-bootstrap";
+import React, { useState } from "react";
 import { Tour as TourType, useTourContext } from '../context/TourContext';
 import { formatCurrency } from "../utils/currencyFormat";
 import { limitedText } from "../utils/limitText";
+import { useWindowSize } from "./UseWindowSize";
 
 const styles = {
   display: "flex",
@@ -11,14 +11,28 @@ const styles = {
 };
 
 export const Tour = (props: TourProps) => {
+  
 
+
+    
     const {showMore,setShowMore,setData,removeTour}=useTourContext();
   const { id, name, info, image, price } = props.data;
-  //Virgul yerine .nokta koyuyoruz ve o sekilde parseFloata ceviririz cunku
-  //virgul sayilarin onluk 3 hane arasinda dogal olarak gelen ayiractir javascript
-  //onun ondalik oldugunu dusunmuyor virgul olunca
-//   const res=formatCurrency();
-//   console.log("res-curr: ",res);
+ 
+
+
+  const [width, height] = useWindowSize();
+    
+  let limitText="";
+if(width<=720){
+   limitText=limitedText(info,8);
+}else if(width<=900 && width>720){
+    limitText=limitedText(info,15);
+  }else if(width>=900 && width<=1200){
+    limitText=limitedText(info,23);
+  }else if(width>=1200){    
+    limitText=limitedText(info,30);
+  }
+
 
   return (
     <div style={styles}>
@@ -39,7 +53,7 @@ export const Tour = (props: TourProps) => {
             </div>
           </div>
           <p className="info">
-            <span>{!showMore ? limitedText(info,30): info}</span>
+            <span>{!showMore ? limitText: info}</span>
             <a className="link" href="/" onClick={(e)=>{
                 e.preventDefault();//Sayfayi yenilemesini onledik bu sekilde..
                 setShowMore(!showMore);
@@ -61,3 +75,36 @@ export const Tour = (props: TourProps) => {
 interface TourProps {
   data: TourType;
 }
+
+
+/*
+
+let newWidth=window.innerWidth;
+console.log("new Widthhhhh: ",newWidth);
+
+if(newWidth<=1070){
+
+}else {
+
+}
+
+window.onresize=(event)=>{
+    if(window.innerWidth<=1070){
+        console.log("innerWidth su an 1074 ve altinda....")
+    }
+}
+
+
+const mediaQuery = window.matchMedia('(max-width: 768px)')
+// Check if the media query is true
+if (mediaQuery.matches) {
+  // Then trigger an alert
+  let newWidth=window.innerWidth;
+console.log("new Width: ",newWidth);
+console.log('Media Query Matched!')
+ 
+}
+
+
+
+*/
