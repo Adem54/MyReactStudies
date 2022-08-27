@@ -37,9 +37,8 @@ const TodoList = () => {
   }
 
   useEffect(()=>{
-    
     dispatch(getTodosAsync());
-  },[]);//dependency array e dispatch de yazilabilir
+  },[dispatch]);//dependency array e dispatch de yazilabilir
 
   if(isLoading)return <Loading/>
   if(error)return <Error message={error}/>

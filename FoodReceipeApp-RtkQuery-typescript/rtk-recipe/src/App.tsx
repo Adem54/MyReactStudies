@@ -169,3 +169,4 @@ export default App;
 //ile ilgili o enpoint olusturulmus ise tetikleniyor ki bu tarz durumlarda zaten biz deger girmeyiz biz select-option ile bize belle secenekler sectirilir ve
 //bu seceneklerde, api de karsiligi olan secenklrdir ve biz ne secersek o url icine dinamik olarak kullanilacak ve, de api-endpointi ne request bizim
 //sectimiz option a gore secilecek..
+

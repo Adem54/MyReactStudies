@@ -1,0 +1,290 @@
+body {
+  background-color: #F1F5F8;
+}
+
+.App {
+  text-align: center;
+}
+
+.main {
+  width: 80%;
+  height: 50rem;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.h1 {
+  font-size: 2.5rem;
+  margin-top: 3rem;
+  letter-spacing: .3rem;
+  position: relative;
+  width: 15rem;
+}
+
+.h1:after {
+  position: absolute;
+  content: "";
+  width: 6rem;
+  width: 50%;
+  height: .2rem;
+  background-color: #C59D5F;
+  bottom: -.5rem;
+  left: 0;
+  left: 50%;
+  transform: translate(-50%);
+
+}
+
+
+.input {
+  border: none;
+  width: 15rem;
+  height: 2.4rem;
+  padding-left: 1rem;
+  border-radius: .3rem;
+  margin: 2rem 0;
+  font-size: 1.3rem;
+  border: 1px solid #EFECEC;
+}
+
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #C59D5F;
+  font-weight: 300;
+  opacity: .3;
+  /* Firefox */
+
+}
+
+.btn {
+  margin-left: 1rem;
+  border: none;
+  padding: .6rem 3rem;
+  border: 1px solid #EFECEC;
+  background-color: lightblue;
+  color: #000;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: .3rem;
+}
+
+.btn:hover {
+  background-color: blue;
+  color: #fff;
+}
+
+
+.nav-menu .nav-ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+}
+
+.nav-ul>li {
+  display: inline-block;
+  padding: .4rem 1rem;
+  /* border: 1px solid; */
+  cursor: pointer;
+  color: #C59D5F;
+  margin-right: .2rem;
+}
+
+.nav-ul>li:hover {
+  background-color: #C59D5F;
+  color: #fff;
+  border-radius: .3rem;
+  transition: all 1s ease;
+}
+
+.nav-ul .active {
+  background-color: #C59D5F;
+  color: #fff;
+  border-radius: .3rem;
+
+}
+
+/*.nav-ul>li:not(:nth-child(4) */
+.nav-ul>li:not(:last-child) {
+  border-right: none;
+}
+
+.container {
+  display: grid;
+  /* grid-template-columns:repeat(2,600px); */
+  grid-template-columns: repeat(2, 40%);
+  /* Bu 40% degeri container in children i durumundaki food-box kutular i icin gecerlidir*/
+  grid-gap: 1rem;
+  grid-row-gap: 3rem;
+  margin-top: 3.3rem;
+  justify-content: center;
+  /* grid isleminde, justify-context ile grid  i kullandigmiz kutunun icindeki children lar ortalanir ama grid in sistemi ne ise ona uyara gider, iste display flex te bunu yaparken zorlandik ama grid de cuk oturdu...*/
+}
+
+@media only screen and (max-width: 1690px) {
+
+
+  .main {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1390px) {
+
+
+  .container {
+    grid-template-columns: repeat(2, 45%);
+    grid-gap: 1rem;
+    grid-row-gap: 3rem;
+    margin-top: 3.3rem;
+
+  }
+}
+
+
+@media only screen and (max-width: 1190px) {
+
+
+  .container {
+    grid-template-columns: repeat(1, 60%);
+    grid-gap: .4rem;
+    grid-row-gap: 3rem;
+
+
+  }
+}
+
+@media only screen and (max-width: 990px) {
+
+
+  .container {
+    grid-template-columns: repeat(1, 70%);
+    grid-gap: .4rem;
+    grid-row-gap: 3rem;
+
+  }
+}
+
+@media only screen and (max-width: 890px) {
+
+
+  .container {
+    grid-template-columns: repeat(1, 80%);
+
+
+  }
+}
+
+
+
+
+.food-box {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  /*grid kullanilinca artik food-box in width ine deger
+  verirken bu width gridde her bir food-box icin kac verilrmis ise
+  ona gore % olacak dolayisi ile ya biz hic width vermeyelim ya da
+  biz dogrudan */
+
+}
+
+/*
+ONEMLI...BESTPRACTISE...
+user agen stylesheet ten yani default kendinde tanimlanan margini var ondan dolayi normalde sola ve uste sifir yanasmasi gerekirken yanasmiyor ve bizi sasirtiyor ama gelip kendi default olarak getirdigini kaldir dersek o zaman iste bekledigmiz yere gelmis oluyor */
+.figure {
+  margin: 0;
+  padding: 0;
+
+}
+
+.figure .img {
+  width: 15rem;
+  border: .2rem solid orange;
+  border-radius: .2rem;
+  display: block;
+  height: 10rem;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+.article {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 1.3rem;
+  box-sizing: border-box;
+}
+
+
+.title-price {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+section>h4 {
+  margin: 0;
+  letter-spacing: .1rem;
+
+}
+
+article>p {
+  margin: 0;
+  line-height: 1.5rem;
+}
+
+.dot {
+  width: 100%;
+  border-top: .12rem dotted;
+  margin-top: .5rem;
+}
+
+.desc {
+  margin-top: 1rem;
+  color: #617d98;
+}
+
+
+
+@media only screen and (max-width: 790px) {
+
+
+  .container {
+    grid-template-columns: repeat(1, 60%);
+    grid-gap: .4rem;
+    grid-row-gap: 3rem;
+
+  }
+
+
+  .food-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+
+
+  .figure .img {
+    width: 25rem;
+    height: 11rem;
+
+  }
+
+
+  .article {
+
+    margin-top: 1rem;
+  }
+
+
+
+}

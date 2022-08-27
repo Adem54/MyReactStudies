@@ -8,6 +8,7 @@ import "./Home.css";
 const Home = () => {
 
   const [deleteContact]=useDeleteContactMutation();
+  
   const {
     data: contacts,
     isLoading,

@@ -180,6 +180,7 @@ export const todos=todosSlice.reducer;
 export const {addTodo,toggleTodo,removeTodo,todosByStatus,todosByStatus2,clearCompleted}=todosSlice.actions;
 
 /*
+BESTPRACTISE..
 Filtreleme islemlerinin hicbirinde ana datayi-state i degistirmek le isin yok ana data da ,state de  sadece status degisecek
 kullanici hangi butona basarsa state deki status o tiklanan butonun statusu olacak ve status un durumuna gore
 ana data nin listelendigi component icinde bir tane filtereleme fonksiyonu yazilacak ve o fonksiyon ana datayi kullanarak
