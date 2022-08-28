@@ -1,0 +1,206 @@
+body {
+  background-color: #F1F5F8;
+}
+
+.App {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.h1 {
+  font-size: 2.5rem;
+  margin-top: 5rem;
+  letter-spacing: .3rem;
+  position: relative;
+  width: 15rem;
+}
+
+.h1:after {
+  position: absolute;
+  content: "";
+  width: 35%;
+  height: .25rem;
+  background-color: #2CAEBA;
+  bottom: -.5rem;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+
+.main {
+ display:flex;
+ justify-content: center;
+ align-items: center;
+
+}
+
+.wrapper {
+  width:80%;
+  display: flex;
+  justify-content:space-between;
+  align-items: flex-start;
+}
+
+.dev-Names {
+  width:20rem;
+}
+
+.dev-Names__ul  {
+  display: flex;
+ /* flex-direction: column; */
+  align-items: flex-start;
+  justify-content:flex-start;
+  
+}
+.dev-Names__ul > li {
+margin-bottom: 1rem;
+font-size: 1.4rem;
+letter-spacing: .1rem;
+cursor: pointer;
+position: relative;
+
+}
+
+.active{
+  color:#2CAEBA;
+}
+
+.active::before {
+  content:"";
+  position: absolute;
+  width:.12rem;
+  height: 2.2rem;
+  background-color: #2CAEBA;
+  left: -2.4rem;
+  
+}
+
+.dev-Names__ul > li:hover{
+  color: #2CAEBA;
+} 
+
+.dev-Names__ul > li:hover::before{
+  content:"";
+  position: absolute;
+  width:.12rem;
+  height: 2.2rem;
+  background-color: #2CAEBA;
+  left: -2.4rem;
+   
+ /* transform: translate(-50%); */
+} 
+
+
+.dev-detail {
+  display:flex;
+  flex-direction: column;
+   width:70%;
+   width:70rem;
+  align-items: center;
+}
+
+
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content:flex-start;
+
+
+}
+.container>p {
+margin-bottom: .6rem;
+letter-spacing: .1rem;
+
+}
+
+.dev-title {
+font-size:1.8rem;
+margin-top:-.3rem;
+}
+.dev-name {
+  font-weight: bold;
+  background-color:#DAE2EC;
+  padding: .2rem .7rem;
+  border-radius:.2rem;
+  color:#617D98;
+}
+
+.dev-date {
+  color:#617d98;
+ 
+
+}
+p {
+  margin:0;
+  padding:0;
+}
+
+
+ul{
+list-style-type: none;
+margin:0;
+padding:0;
+display:flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+}
+
+.duties {
+  margin-top:1.2rem;
+  width: 50rem;
+  
+}
+
+.dev-duty-ul{
+  display:flex;
+
+}
+/* f101 */
+.dev-duty-ul>li {
+  color: #324d67;
+margin-bottom:1rem;
+line-height: 1.5rem;
+position:relative;
+margin-left:2rem;
+word-wrap: break-word;
+
+}
+
+/*font-awesome icons unicode diye ararsak aradigmiz
+iconun unicode karsiligi cikacaktir..*/
+.dev-duty-ul>li::before{
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f101";
+  color:#2CAEBA;
+  font-size:.8rem;
+  position: absolute;
+  left:-2rem;
+  top:.8rem;
+}
+
+.btn {
+  background-color:#2caeba;
+  color:#bff8fd;
+  border: none;
+  width:10%;
+  padding:.5rem 0;
+  border-radius: .4rem;
+  font-weight: 800;
+  letter-spacing:.07rem;
+  cursor: pointer;
+  transition:all .2s ease-out;
+margin-top: 3rem;
+}
+
+.btn:hover {
+  background-color:aqua;
+  color:#000;
+  box-shadow: 0 0 1px 1px #6a737b
+}
