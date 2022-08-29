@@ -1,0 +1,140 @@
+body {
+  background-color:#F1F5F8;
+}
+.App {
+ display: flex;
+ flex-direction: column;
+ align-items:center;
+ justify-content:center;
+}
+
+
+/*slider in kutucugunun tamamini icine alan div burasi */
+.section-center {
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 80vw;
+  height: 450px;
+  max-width: 800px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+}
+
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  width: 50rem;
+  position:relative;
+
+  /*yeni slider dan ekledim..*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s linear;
+}
+/*
+Biz slider ile kaydira kaydirea gosterecegmz datalar icin sunu yapiyoruz aslinda normalde bu datalar zaten yanyana duruyor ancak biz bunlardan sadece aktif olan i kendi ayarlaigmiz slider-cart
+kutucugunda gosteriyoruz yani ornegin next e tikladigmizda gelen
+evet sagdan geliyor obur taraftan tikladigmzda soldasn geliyor 
+ancak, bizim icin opactity i 0 yapilmis ve sagda duran yer kaplayan
+bir element gibi aslinda...
+
+*/
+
+main.activeSlide {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+main.lastSlide {
+  transform: translateX(-100%);
+}
+main.nextSlide {
+  transform: translateX(100%);
+}
+
+
+.right-click {
+position:absolute;
+width:2rem;
+height: 2rem;
+background-color: #617D98;
+border-radius:.15rem;
+right:0;
+top:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:all .3s ease-in-out;
+cursor:pointer;
+
+}
+.fa-angle-right, .fa-angle-left {
+font-size:1.4rem;
+color:#fff;
+}
+.left-click {
+  position:absolute;
+  width:2rem;
+  height: 2rem;
+  background-color: #617D98;
+  border-radius:.15rem;
+  left:0;
+top:50%;
+  display:flex;
+justify-content:center;
+align-items:center;
+transition:all .3s ease-in-out;
+cursor:pointer;
+
+  }
+
+  .right-click:hover, .left-click:hover {
+    background-color:#ba5d2c;
+  }
+
+ 
+.img-wrap {
+  margin:0;
+  padding:0;
+}
+
+.img-wrap>img {
+  width: 10rem;
+  height:10rem;
+  object-fit:cover;
+  object-position:top;
+  border-radius: 50%;
+  border:.25rem solid #bcccdc;
+}
+
+.name{
+letter-spacing: .1rem;
+color:#ba5d2c;
+margin-bottom:0;
+text-transform: uppercase;
+
+}
+.title {
+  margin-top:.3rem;
+  color:#324d67;
+  text-transform: capitalize;
+}
+.quote {
+text-align: center;
+line-height: 2rem;
+color:#617d98;
+}
+
+.fa-quote-right {
+  font-size:3rem;
+  color:#ba5d2c;
+}
