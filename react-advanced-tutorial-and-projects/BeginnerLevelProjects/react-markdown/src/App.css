@@ -1,0 +1,38 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+/*
+=============== 
+Markdown
+===============
+*/
+.markdown {
+  padding: 4rem;
+  display: grid;
+  row-gap: 4rem;
+}
+.input {
+  border-color: transparent;
+  border-radius: var(--radius);
+  font-size: 1.2rem;
+  line-height: 2;
+  box-shadow: var(--dark-shadow);
+  min-height: 30vh;
+}
+.input,
+.result {
+  padding: 1rem 2rem;
+}
+
+@media screen and (min-width: 992px) {
+  .markdown {
+    min-height: 100vh;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+}

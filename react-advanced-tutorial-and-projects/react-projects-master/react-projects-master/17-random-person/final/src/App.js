@@ -48,9 +48,27 @@ function App() {
   useEffect(() => {
     getPerson()
   }, [])
+
+/* burda bsestpractise ozellik olarak data set kullanilmis... ve custom attribute olusturulup 
+o attribute e erisim saglaniyor ve bu islem onMouseover uzerinden yapiliyor
+ Yani biz birbirinden cok farkli olan ama her birisinin uzerine gittgimizde o na ait
+  datayi almak istedigmzde dinamik bir sekilde ona ait
+ olan elementi almak icin...dikkat edelim biz className olarak hepsidne icon kullanmisisz
+  ki evet.capturing ozellgini kullanarak ayni alan icinde className i icon ise bunu uygula diyoruz...
+  sonrasinda da biz custom olarak data-set uzerinden data-label className i veriyoruz her bir butona ve value olarak da biz
+ obje iicnde property olarak ne bekliyorsak onlari atiyoruz ki hangisinn uzerine gelirsek o obje icindeki 
+ ona karsilik gelen degere erisebilelim diye
+ */
+ 
   const handleValue = (e) => {
     if (e.target.classList.contains('icon')) {
-      const newValue = e.target.dataset.label
+      //icon class i na sahip olan elementler uzerinde gezindgimzde gerceklestir bu islemi
+      console.log("e.target.dataset_ ",e.target.dataset);
+      console.log("e.target.dataset_ ",e.target.getAttribute("data-label"));//class i icon olan elemntler uzerinde 
+      //gezinirken hangi elemntin uzeerinde isek
+      // onda ait data-label attribute values ini veriyor...
+      const newValue = e.target.dataset.label//dataset objesi olustururyor ve onun icerisinde data-label, 
+      //data-text gibi data ile baslayan ismleri property olarak veriyor
       setTitle(newValue)
       setValue(person[newValue])
     }

@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('a')
   const [cocktails, setCocktails] = useState([])
 
+  /* sayfa da her data yenilendiginde api ye istek atmamasi icin bir istek gonderme isleminni useCallback icinde yapari */
   const fetchDrinks = useCallback( async () => {
     setLoading(true)
     try {

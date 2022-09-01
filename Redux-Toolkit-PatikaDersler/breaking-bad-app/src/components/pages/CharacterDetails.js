@@ -70,6 +70,7 @@ api()
   //BU ARADA BIZ BIZE LIN UZERINDEN HOME SAYFASINDAN MI GELIYOR YOKSA DIREK ADRES CUBUGNUDAN MI DUSTU BUNU DA YINE
   //STATUS UZERINDEN ANLAYABILIYORUZ....ADRES CUBUGUNDAN GELIRSE SAYFA RENDER EDILECEGI ICIN STATUS IDLE DIR YOK HOME
   //SAYFASINDAN GELIRSE STATUS SUCCEDED OLARAK GELIR
+  //3.olarak da root state uzerindden index.js mizde root.dispatch() ile biz detay datalarini getirecek fonksiyonu calistirip ordan datayi alirzi
 
   return (
     <>
