@@ -8,10 +8,11 @@ import PaginationButton from "./PaginationButton";
 import { getLastTenElementsInArray } from "../utils";
 const Pagination = () => {
   const [perPage,setPerPage]=useState<number>(10);
+  //Sunu da anlayalim, biz her bir sayfada kac data olacagini kendimz manuel burdan dirak kodda veriyoruz ama istersek bunu bir select-option ile kullaniciya sectirebiliriz..5-10-20 gibi secenekler sunariz kullanici kac data birden gormek isterse o kadar listeler sayfada ...
   const [page,setPage]=useState<number>(1);  
   const {users,setUsers}=useContextUser();
 
-  const {data:allUsers}=useQuery("allUsers",getAllUsers);
+ const {data:allUsers}=useQuery("allUsers",getAllUsers);
   
 const {
   data,
@@ -37,12 +38,7 @@ setUsers(data);
 
 
 
-/*
-BUNU ANLAMAK COOK ONEMLI...
-1-Sunu anlayalim once, biz kac tane sayi butonu koyacagimzi biz belirleriz
-ve bu normalde bazi farkli yaklasimlarda, ornegin 100 data var ise 10 a bolup data sayisi bolu 10 yapmis yani dinamik koymus butonlari data sayisi artince butonda artiyor ama bu nekadar dogru 1000 data gelirse ne olacak ve next ve previous denen butonlar niye var, istte zaten biz normalde kendimiz kac tane sayi butonu gostereceksek onu belirleriz ve ardindan da devami next e tikladikca gelirken gittigi yerden de bir gerisne previous a tikladikca gelir..ok..
 
-*/
  let pagesArray=Array(10).fill(0).map((item:number,index:number)=>index+1);
 
 

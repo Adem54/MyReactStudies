@@ -3,6 +3,7 @@ import { useFetch } from './useFetch'
 import Follower from './Follower'
 function App() {
   const { loading, data } = useFetch()
+  //(10) [Array(10), Array(10), Array(10), Array(10), Array(10), Array(10), Array(10), Array(10), Array(10), Array(10)]
   const [page, setPage] = useState(0)
   const [followers, setFollowers] = useState([])
 
@@ -14,7 +15,14 @@ function App() {
   const nextPage = () => {
     setPage((oldPage) => {
       let nextPage = oldPage + 1
-      if (nextPage > data.length - 1) {
+      console.log("nextPage: ",nextPage);
+      console.log("data: ",data);
+      console.log("result: ",nextPage > data.length - 1);
+      if (nextPage > data.length - 1) {//data icinde 10 tane dizi olan bir arraydir, ve 
+        //nextPage 10 oldugunda diyor ki nexPage 10 ise, o zaman nextPage i 0  yap diyor
+        // ve de bu sekilde 10.butondan 1.butona geciyor..Burda nextPage normalde ekranda
+        // gozuken sayfa sayilarinin 1 gerisinden geliyor, cunku sayfa sayisi nextPage+1 
+        //olarak gosteriliyor, nexPage i 0 yapinca da ekrndaki sayfa 1 oluyr
         nextPage = 0
       }
       return nextPage

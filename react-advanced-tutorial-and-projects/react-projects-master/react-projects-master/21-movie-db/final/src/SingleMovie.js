@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { API_ENDPOINT } from './context'
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
 import useFetch from './useFetch'
 const SingleMovie = () => {
   const { id } = useParams()

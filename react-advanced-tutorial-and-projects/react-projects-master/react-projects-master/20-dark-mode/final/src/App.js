@@ -3,12 +3,14 @@ import data from './data';
 import Article from './Article';
 
 const getStorageTheme = () => {
+  //localStorage i cek et eger orda bir thema var ise onu al yok ise baslangic olarak light theme ile basla
   let theme = 'light-theme';
   if (localStorage.getItem('theme')) {
     theme = localStorage.getItem('theme');
   }
   return theme;
 };
+
 
 function App() {
   const [theme, setTheme] = useState(getStorageTheme());
@@ -23,6 +25,9 @@ function App() {
 
   useEffect(() => {
     document.documentElement.className = theme;
+    //Bu dogrudan html i isaret eder  yani root elemene veriyor bunu aslinda yani body ye vermis gibi dusun
+    //REactin icinde useEFfect te veya eventl erin icinde bodazlama document.... ve useRef ve event.currentTarget uzerinden
+    //direk elementlere dalalim...cok buyuk bir alan var orda bize yardimi dokunacak..
     localStorage.setItem('theme', theme);
   }, [theme]);
   return (

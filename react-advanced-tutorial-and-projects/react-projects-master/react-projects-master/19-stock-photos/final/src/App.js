@@ -35,12 +35,14 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
+      console.log("data: ",data);
       setPhotos((oldPhotos) => {
-        if (query && page === 1) {
-          return data.results;
-        } else if (query) {
-          return [...oldPhotos, ...data.results];
-        } else {
+        if (query && page === 1) {//boyle ise kullanici ilk defa gelmistir cunku page=1 default page degeridir
+          return data.results;//query oldugu icin gelen data nin icindeki results dizisindedir images objelerimz
+        } else if (query) {//yok sadece queryile gelmis ise eski data yi korumamiz gerekiyor
+          return [...oldPhotos, ...data.results];//Burda da query var ondan dolay i boyle alinir data
+        } else {//degil ise demekki normal images leri getiren endpoint tetklenmistir onda da images objelerinden olusan dizi
+          //direk donen data nin kendisidir..
           return [...oldPhotos, ...data];
         }
       });
@@ -78,6 +80,8 @@ function App() {
     return () => window.removeEventListener('scroll', event);
   }, []);
 
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query) return;

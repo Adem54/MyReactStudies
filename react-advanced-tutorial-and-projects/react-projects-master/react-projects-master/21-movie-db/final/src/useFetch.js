@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 const API_ENDPOINT = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_MOVIE_API_KEY}`
 
+ 
 const useFetch = (urlParams) => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState({ show: false, msg: '' })
@@ -12,7 +13,8 @@ const useFetch = (urlParams) => {
       const data = await response.json()
 
       if (data.Response === 'True') {
-        setData(data.Search || data)
+        setData(data.Search || data)//endpointten gelecek veri data objesi icinde Sarch dizisidir
+        //yok ordan gelmez ise o zaman da bizim, lokal deki data state imizi ver diyoruz
 
         setError({ show: false, msg: '' })
       } else {
