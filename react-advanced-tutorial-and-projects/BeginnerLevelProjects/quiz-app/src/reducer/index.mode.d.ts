@@ -1,7 +1,5 @@
 
 import {ResponseDataType, State, UserQuizResult} from "../context/index";
-
-
 export type ActionType =
   | { type: "LOADING" }
   | { type: "SUCCESS", payload: ResponseDataType }

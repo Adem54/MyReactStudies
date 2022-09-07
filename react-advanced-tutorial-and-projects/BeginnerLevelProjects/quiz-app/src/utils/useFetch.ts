@@ -71,8 +71,6 @@ export const useFetch = ({
     );
   }, [amount, category, difficulty]);
 
-
-
   console.log("state::::",state);
   return  state;
 };

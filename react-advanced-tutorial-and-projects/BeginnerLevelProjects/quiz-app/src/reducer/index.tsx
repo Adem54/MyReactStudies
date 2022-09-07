@@ -3,7 +3,7 @@ import * as AllTypes from "./actions";
 import { ActionType } from "./index.mode";
 
 export const reducer = (state: State, action: ActionType): State => {
-  //action:ActionType bir ActionType olusturmamiz gerekiyor
+ 
 
   switch (action.type) {
     case AllTypes.SET_LOADING:

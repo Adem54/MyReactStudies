@@ -125,7 +125,6 @@ const startFromScratch=()=>{
   const getQuestions = async () => {
     const queryUrl = `amount=${state.amount_query}&category=${state.category_query}&difficulty=${state.difficulty_query}&type=multiple`;
     let myUrl = `${API_ENDPOINT}${queryUrl}`;
-
     dispatch({ type: "LOADING" });
     try {
       const res = await axios.get<ResponseDataType>(myUrl);
