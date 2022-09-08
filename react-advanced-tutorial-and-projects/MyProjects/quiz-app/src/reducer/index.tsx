@@ -4,7 +4,6 @@ import { ActionType } from "./index.mode";
 
 export const reducer = (state: State, action: ActionType): State => {
  
-
   switch (action.type) {
     case AllTypes.SET_LOADING:
       return { ...state, isLoading: true, error: "" };

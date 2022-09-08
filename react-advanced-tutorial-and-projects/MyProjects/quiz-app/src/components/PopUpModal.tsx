@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 
 const PopUpModal = () => {
-
   const [resultOfPerc,setResultOfPer]=useState<number>(0);
   const { handleCloseModal,openModal,userQuizResults,startFromScratch } = useGlobalContext();
   
   const [isTabChanged,setIsTabChanged]=useState<boolean>(false);
+  
   useEffect(()=>{
     const followTabChange=()=>{
       setIsTabChanged(document.hidden);
@@ -48,8 +48,7 @@ if(openModal){
        className="play-again btn"
       onClick={()=>{
         handleCloseModal();
-        startFromScratch();
-        
+        startFromScratch(); 
       }}
       ><Link to="/"> Play again</Link></button>
        </section>

@@ -1,0 +1,21 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+nav>a{
+  list-style-type: none;
+  color:#000;
+  margin-left:1rem;
+  font-size:1.4rem;
+}
+
+.link {
+  font-weight: 700;
+}
+
+.active {
+  color:red;
+}

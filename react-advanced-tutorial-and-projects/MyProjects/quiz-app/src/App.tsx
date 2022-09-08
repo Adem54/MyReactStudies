@@ -7,8 +7,6 @@ import QuizPage from "./components/QuizPage";
 import StartPage from "./components/StartPage";
 
 function App() {
- 
-
   return (
     <div className="App">
       <ToastContainer position="top-center" />
