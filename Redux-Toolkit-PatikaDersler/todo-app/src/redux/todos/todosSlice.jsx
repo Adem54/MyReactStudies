@@ -6,8 +6,10 @@ import axios from "axios";
     //objesi icinde type olarak su sekilde geliyor todosSlice/addTodo- name/funcitonname gibi
 export const getTodosAsync=createAsyncThunk('todos/getTodosAsync',async ()=>{
     //`${process.env.REACT_APP_API_BASE_ENDPOINT}/todos`
-    console.log();
+   
     const response=await fetch("http://localhost:7000/todos");
+    // const data= await response.json();
+    // console.log("response.json: ", data);
     return await response.json();
 })
 //pending-fulfilled-rejected diye kavramlar geliyor-loading-success-error
@@ -101,6 +103,11 @@ reducers:{
 },
 
 //Api islemleri ile ilgili slice icinde reducers dan sonra geliyor
+//Biz api islemleri ile, yaptigimz add,remove,updat islemlerini yapiyorsak
+//reducer da bunlarla ilgili islem yapmaycagiz,ustte ayni islemlerin var olma sebebi, 
+//biz extrareducer dan once, yani datalari asenkron olarak almadan once, 
+//datalari biz kendimiz asenkron olmayan bir sekilde sadece lokal de kendimiz 
+//yapmistik ondan dolayi
 extraReducers:{
     //getTodos
       [getTodosAsync.pending]:(state,action)=> {
@@ -111,6 +118,7 @@ extraReducers:{
       [getTodosAsync.fulfilled]:(state,action)=>{
         //Burasi da success durumunda, bize datayi dondurecek dolayisi ile o da bize
         //action.payload uzerinden gelecek
+        console.log("action.payload-getTodoAsync: ",action.payload);
          state.items=action.payload;
          state.isLoading=false;
       } ,
@@ -130,7 +138,7 @@ extraReducers:{
         //Dolayisi ile datayi eklemek icin enter a basma ile data nin on yuzde
         //eklenmesi, arasinda gecen sure de loading olacak...
         state.items.push(action.payload);
-    state.addNewTodoLoading=false;
+        state.addNewTodoLoading=false;
   },  [addTodoAsync.rejected]:(state,action)=>{
     state.addNewTodoLoading=false;
     state.addNewTodoError=action.error.message;
@@ -170,6 +178,7 @@ export const selectfilteredItems=state=>{
    
 
 export const selectTodos=state=>state.todos.items;
+//Burasini da extraReducer da getTodosAsync isleminde api den gelen data lokal state timize eklenmis oluyor...
 export const selectLoading=state=>state.todos.isLoading;
 export const selectError=state=>state.todos.error;
 export const selectAddTodoLoading=state=>state.todos.addNewTodoLoading;

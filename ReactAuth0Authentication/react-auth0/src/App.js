@@ -5,6 +5,7 @@ function App() {
   const { loginWithRedirect, logout, isAuthenticated,isLoading,user } = useAuth0();
   console.log("isAuthenticated: ", isAuthenticated);
   console.log("user: ", user);
+  console.log("isLoading: ", isLoading);
   
   return (
     <div className="App">

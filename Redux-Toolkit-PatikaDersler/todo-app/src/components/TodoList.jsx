@@ -9,6 +9,7 @@ import Error from "./Error";
 const TodoList = () => {
   const filterTodoItems=useSelector(selectfilteredItems);
   const { items,todosStatus,todosStatus2 } = useSelector((state) => state.todos);
+  console.log("todos::::",items);
   const myTodos=useSelector(selectTodos);
   const isLoading=useSelector(selectLoading);
   const error=useSelector(selectError);

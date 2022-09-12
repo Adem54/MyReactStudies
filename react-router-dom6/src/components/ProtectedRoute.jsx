@@ -13,8 +13,12 @@ const ProtectedRoute = ({user,children}) => {
     <div>
       {/* <Outlet/> */}
       {children}
-      {/*Burda ister Outlet ister children kullaniriz, ki Outlet react-router-dom 6 ile geldi, onun icin Outlet kullanmak daha mantiklidir
-      Outlet de aslinda children i temsil ediyor */}
+      {/*Burda children kullaniriz cunku  <Route path="dashboard" element={<ProtectedRoute user={user}><Dashboard user={user}/></ProtectedRoute>}/>
+      Eger asagidaki gibi kullansa idik o zaman da Outlet kullanmamiz gerekirdi
+      <Route  element={<ProtectedRoute user={user}/>}>
+      <Route path="dashboard"  element={<Dashboard user={user}/>}/>
+      </Route>
+       */}
     </div>
   )
 }
