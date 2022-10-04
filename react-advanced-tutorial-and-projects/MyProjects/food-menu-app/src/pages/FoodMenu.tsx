@@ -5,6 +5,7 @@ import Loading from "./Loading";
 
 const FoodMenu = (props:foodMenuProps) => {
   const {menu,isLoading}=props;
+  console.log("menu: ",menu)
   return (
   
     <>

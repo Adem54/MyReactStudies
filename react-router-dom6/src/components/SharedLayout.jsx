@@ -2,12 +2,13 @@ import React from 'react'
 import { Outlet } from "react-router-dom"
 import Navbar from './Navbar'
 import StyledNavbar from './StyledNavbar'
+
 const Home = () => {
   return (
     <>
     {/* Bu home route parent componenti altindaki tum compnentlerde de gozukecektir...bazen
     biz tum home parent componenti ve onun altindaki componentler icinde sabit gostermek istedigmz 
-    componentler olabilir iste, bu sekilde kullanabilirz
+    componentler olabilir iste, bu sekilde kullanabilirz, ne gibi asagida kullandgimiz NabBar gibi tabi ki
     */}
       <StyledNavbar/>
        <Outlet/>

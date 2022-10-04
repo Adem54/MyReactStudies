@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch  
+    
+        npx tailwindcss -i ./input.css -o ./dist/output.css --watch  
+    bu sekilde tailwindcss i calistirip izlemeye baslayinca ki, src klasorumuz olmadigi icin biz direk input.css dosyasina gideriz
+    O zaman bir dist klasoru ve bu klasor icinde output.css isminde bir dosya olusur ve bizim yazdgimiz tailwind class larinin css leri burda otomatik olusturulur ve de html dosyamiz bu css leri gorebilmis olur ve ondan etkilenmis olur
+    -->
+    <link rel="stylesheet" href="./dist/output.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="text-3xl font-bold underline bg-orange-300 ml-4 mt-4 w-64 text-center p-4  sm:font-normal sm:no-underline">
+        Hello world!
+      </h1>
+
+      <hr/>
+     
+
+      <hr/>
+      <br/>
+
+
+      
+<div class="text-center text-5xl  text-blue-600 font-bold p-4 m-5 bg-red-300 w-65 sm:h-32 md:text-white">Adem Erbas</div>
+<!--  Tailwind direk class isimleri ile tum css i veriyoruz ve bu sayede surekli css e gidip gelip 
+islem yapmaktan kurtulyoruz..
+Ve eger tailwindplay de direk yazarsak o zaamn her class in hangi css ozelliklerine sahip oldugunu gorebiliyoruz
+
+sm:h-32  demektir ki 640px den itibaren h-32 yi uygula demektir.... bu onemli...
+md:text-white 768px ekran buyuklugunden itibaren color i white yap demektir..
+ -->
+
+
+<!--
+Breakpoint prefix	Minimum width	CSS
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }
+To add a utility but only have it take effect at a certain breakpoint,
+ all you need to do is prefix the utility with the breakpoint name, followed by the : character:
+  Responsive design da  md-768px oldugunda w-32 diyerek, width:32 olsun diyoruz
+  lg:w-48 de 1024px olsuugnda da width: 
+   Width of 16 by default, 32 on medium screens, and 48 on large screens
+     w-32 demek 32 yi 4 e boleriz, 8rem demektir..
+     Tailwind css mobilfirst yaklasimini benimser...
+     Yani biz herhangi bir tailwind class uyguladimgz zaman once small-screen icin uygular, yani mobile-first yaklasimini benimser
+    -->
+
+<img class="w-16 md:w-32 lg:w-48" src="...">
+
+
+<div class="bg-blue-500 text-4xl p-2 font-medium h-screen flex items-center justify-center">  
+  <div class="w-48 h-48 sm:w-64 sm:h-64 bg-white md:h-96 md:w-96"></div>
+  <!-- Normal de yazdigimz direk className ler kucuk ekran icin gecerlidir...yani mobilfirst  -->
+ </div>
+<!-- h-screnn demek height:100vh demektir yani tum yuksekligi kapat demektir..  -->
+      <br/>
+      <br/>
+
+      <div class="flex h-screen items-center justify-center bg-blue-300 p-5">
+        <!-- gap-16 demek icinde kullanidgimiz div lerin icindeki elementler arasina konulan boslugu belirtir-->
+        <div class="rounded-lg bg-white p-4 shadow-2xl sm:m-0 sm:flex sm:gap-16 sm:p-4">
+          <div class="flex items-center gap-2">
+            <img class="h-8 w-8 rounded-full object-cover sm:h-48 sm:w-48 sm:rounded-none" src="https://nstpjda.org/wp-content/uploads/2014/08/team1-580x340.jpg" />
+            <span class="gap-4">Jane Doe</span>
+          </div>
+          <div class="mt-2">
+            <p class="font-thin italic">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias expedita consectetur odio id esse repellendus exercitationem adipisci ratione explicabo, ipsam, laudantium natus neque. Voluptate repudiandae porro consectetur facilis aliquam? Animi!</p>
+            <span class="text-sm text-gray-400"> Co Founder Lama Dev </span>
+          </div>
+        </div>
+      </div>
+</body>
+</html>

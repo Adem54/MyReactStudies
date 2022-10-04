@@ -8,6 +8,7 @@ import Context from './components/Context';
 import MyButton from './components/MyButton';
 import InheritedButton from './components/InheritedButton';
 import InheritedButtonExample from './components/InheritedButtonExample';
+import Testing from './components/Testing';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <MyButton/>
     <InheritedButton/>
     <InheritedButtonExample/>
+    <Testing/>
     </div>
   )
 }

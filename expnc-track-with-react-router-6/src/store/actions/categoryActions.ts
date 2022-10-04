@@ -14,7 +14,7 @@ export const getCategories=()=>async (dispatch:CategoryDispatch)=>{
 }
 
 export const addCategory=(form:CategoryForm)=>async (dispatch:CategoryDispatch)=>{
-    dispatch({type:"ADD_CATEGORY_START"});
+         dispatch({type:"ADD_CATEGORY_START"});
     try {
         const response=await api().post<CategoryType>("/categories",form);
         //Yeni bir kategori ekledigmizde bize gelen deger CategoryType inda bir objedir

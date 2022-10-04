@@ -23,6 +23,7 @@ const [user,setUser]=useState(null);
      1- BrowserRouter altina normal jsx-html elemnti yerlestirebiliriz ancak
       Router veya Router icerisinde bunu yapamayiz
       Burasi sunun icin onemli biz tum projede gozukmesini istdgimz yapilari nav-footer gibi bu sekilde kullanabiliriz
+      Ama bu biraz daha eski bir yaklasimdir bunun yerine biz, bunlari Layout icinde de yerlestirebilecegiz
       
       2-Parent-route(nested route)
       Ana elemnti Home yapip path ini de / belirleyip, Route u children alacak sekilde
