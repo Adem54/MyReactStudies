@@ -15,9 +15,7 @@ const StyledNavbar = () => {
 
         <NavLink  to="/login"
            className={({isActive})=>(isActive ? "link active" : "link")}
-         >Login</NavLink>
-
-       
+         >Login</NavLink>     
         </nav>
        )
 }
@@ -47,6 +45,23 @@ yazmamiz gerekir
   Eger biz dogrudan css de .active className i icin style verir isek zaten 
   o zaman compnent icinde inline-class ile hemen ustte yaptimgz islemlere de 
   gerek kalmayacak ama class yaklasimi en cok kullanilan yaklasimdir       
+
+ <NavLink  to="/"  
+            className={({isActive})=>(isActive ? "link active" : "link")}
+         >Home</NavLink>
+         <NavLink  to="/about"
+           className={({isActive})=>(isActive ? "link active" : "link")}
+         >About</NavLink>
+         <NavLink  to="/products"
+           className={({isActive})=>(isActive ? "link active" : "link")}
+         >Products</NavLink>
+
+        <NavLink  to="/login"
+           className={({isActive})=>(isActive ? "link active" : "link")}
+         >Login</NavLink>       
+
+
+
 */
 
 export default StyledNavbar
